@@ -4,7 +4,7 @@ Welcome to the Privacy Preservation wiki!
 
 # Overview
 
-Privacy preserving information sharing. This project aims to share data with only the parties that meet certain attributes. In this model no party is truxted with the exeption of the oneself and the Key Distribution Service(KMS). This sharing of Information is as follows:
+Privacy preserving information sharing. This project aims to share data in an encrypted manner with only the parties that meet certain attributes. In this model, no party is trusted with the exception of the Key Distribution Service (KMS). This sharing of Information is as follows:
 
 1. An organization enrolls in the system via KMS
     - KMS generates secrets keys for that party
@@ -19,13 +19,15 @@ Privacy preserving information sharing. This project aims to share data with onl
 This project was built using docker. For help regathering docker please visit [docker docs](https://docs.docker.com/).
 ## Structure
 Structure of the overall project is as follows
-![overview](images/overview.png)
+![overview](images/overview-v2.png) 
 
-The system has 4 parts. The collector is in charge of encrypting the data with the encryption policy set by the organization that wants to share the data. The collector has two parts (not in the diagram), the encryption module and the gatherer, the encryption module just encrypts any data sent to it by one or more gatherers(they just collect the data) and ships it over encrypted to the backend DB.
+
+
+The system has 4 parts. The collector is in charge of encrypting the data with the encryption policy set by the organization that wants to share the data. The collector has two parts, the encryption module and the gatherer, the encryption module just encrypts any data sent to it by one or more gatherers(they just collect the data) and ships it over encrypted to the backend DB.
 
 The backend/API/DB just collects the encrypted data and stores it into a DB. when the system is queried it returns applicable data, using DE and ORE encryptions. 
 
-The query client just handles queries from a user. It handles all processing to carry out this operations. That is,t he encryption of the query, the query itself, and the decryption of the data. A user queries and it outputs data. The user querying will only be able to decrypt data that the original encrypting user desired, this is enforced with CPABE.
+The query client just handles queries from a user. It handles all processing to carry out this operations, that is, the encryption of the query, the query itself, and the decryption of the data. A user queries with the query client which will and it outputs data. The user querying will only be able to decrypt data that the original encrypting user desired, this is enforced with CPABE.
 
 The KMS handles key creation for new members of the system. This also includes attributes, new keys are generated based on a users/orgs attributes. Keys with attributes allow users to decrypt information that the encrypting user desired. The KMS is used by the collector to get the public keys when encrypting, by the administrator when setting up the collectors policy to determine available attributes, by the backend to retrieve the ORE key to filter requests numerically, by the query client to get private keys for decryption purposes. The KMS server is not needed at runtime if keys are preloaded and stored locally by each software, in this case, KMS is only used for key creation. 
 
@@ -197,13 +199,13 @@ Secrets and configurations are never included in the images as they are mounted 
 
 When fetching the images, the base image is not necessary as the images are bundled with the base image.
 
-### Option 1 Export import save
+<!-- ### Option 1 Export import save
 [tutorial](https://stackoverflow.com/a/23938978/12044480)   
 [docker export](https://docs.docker.com/engine/reference/commandline/export/)   
 
 ### Option 2 Docker registry
 [docker registry](https://docs.docker.com/registry/deploying/)   
-[How to use your own Registry tutorial](https://www.docker.com/blog/how-to-use-your-own-registry/)
+[How to use your own Registry tutorial](https://www.docker.com/blog/how-to-use-your-own-registry/) -->
 
 # Running
 ## Docker
@@ -244,13 +246,17 @@ Protocol can be either `http` or `https`. The server administrator will let you 
 > :warning: **Note**: There is no trailing `/`
 
 ##### Setting up the encryption policy TODO
-timestamp match
+<!-- timestamp match
 default match 
 exeact match
-regex match
+regex match -->
 
+Policy matching is done according to the config file for the collector. One can use exact match or regex match for the name of the field. Encryption is done field wise. The config file also specifies what encryption policy is used for that field. Each record must have at least one index.    
+    
+Please use the `-a` on the collector wrapper scrip to figure out available attributes. Then one can use `and`, `or`, `parenthesis` to create the policy.
+example of policy: `"DEFAULT and RESEARCH"`. With This example policy the person quering must be `"DEFAULT and RESEARCH"` to be able to decrypt that field.
 
-##### Collector
+<!-- ##### Collector -->
 
 ### Run
 Execute the respective wrapper script at the root of the module. Each wrapper script support the `-h` and the `--help` flag, which will output their help/usage information.
@@ -293,7 +299,7 @@ cat output
 #### Collector
 The collector is a multi-part module. The collector has the encryption module and the gatherers which ship the information to the collection encryption module to be encrypted. To run the collector correctly one has to setup the encryption policy. 
 
-One has to start the Collector using `collectr.sh`, then one can run mulple collector clients. The only requirement for a client is that they have to connect to the collector tcp socket and send one json record per connection. 
+One has to start the Collector using `collector.sh`, then one can run mulple collector clients. The only requirement for a client is that they have to connect to the collector tcp socket and send one json record per connection. 
 
 A collector client is provided within the collector module. The dependencies are  `python3`, `python3-venv` and modules specified in `requirements.txt` (install as specified below).
 
@@ -322,6 +328,22 @@ pip install -r requirements.txt
 python3 collector-client.py <json-file>
 
 ```
+Note: `collector-client.py` has a flag `--json-key`, it make it so it only sends that spesific key-data pair. For example:
+```json
+{"_id": {"$oid": "5d659c2d34ecea6c769ec9ff"}, "itype": "raw", "data": {"session": "17e8b9e02971", "geoip": {"ip": "165.227.91.185", "latitude": 40.7214, "longitude": -74.0052, "location": {"lat": 40.7214, "lon": -74.0052}, "continent_code": "NA", "timezone": "America/New_York", "country_code3": "US", "country_code2": "US", "postal_code": "10013", "country_name": "United States", "city_name": "New York", "dma_code": 501, "region_name": "New York", "region_code": "NY"}, "source": "/home/cowrie/cowrie/var/log/cowrie/cowrie.json", "@timestamp": "2019-08-27T20:51:18.993Z", "tags": ["beats_input_codec_plain_applied", "geoip", "beats_input_codec_json_applied"], "timestamp": "2019-08-27T20:51:16.595926Z", "host": {"name": "ssh-peavine"}, "duration": 120.02226901054382, "eventid": "cowrie.session.closed", "msg": "Connection lost after 120 seconds", "beat": {"hostname": "ssh-peavine", "version": "6.5.4", "name": "ssh-peavine"}, "offset": 3165054, "@version": "1", "src_ip": "165.227.91.185", "prospector": {"type": "log"}, "sensor": "ssh-peavine"}, "orgid": "identity--f27df111-ca31-4700-99d4-2635b6c37851", "timezone": "US/Pacific", "sub_type": "x-unr-honeypot", "_hash": "ce1125ef568028d65ad444dd9a6dacf6a860b7a3d0a43ebabc0b03fb258c80db", "uuid": "raw--8d30f29e-9285-4790-ac57-bbba5aa56fbb", "filters": ["filter--ad8c8d0c-0b25-4100-855e-06350a59750c"]}
+```
+The data that we are after is inside the `data` key, therfore we wouls use the tool as follows:
+```bash
+python3 collector-client.py --json-key data <json-file>
+```
+this will result in only sending the following:
+```json
+{"session": "17e8b9e02971", "geoip": {"ip": "165.227.91.185", "latitude": 40.7214, "longitude": -74.0052, "location": {"lat": 40.7214, "lon": -74.0052}, "continent_code": "NA", "timezone": "America/New_York", "country_code3": "US", "country_code2": "US", "postal_code": "10013", "country_name": "United States", "city_name": "New York", "dma_code": 501, "region_name": "New York", "region_code": "NY"}, "source": "/home/cowrie/cowrie/var/log/cowrie/cowrie.json", "@timestamp": "2019-08-27T20:51:18.993Z", "tags": ["beats_input_codec_plain_applied", "geoip", "beats_input_codec_json_applied"], "timestamp": "2019-08-27T20:51:16.595926Z", "host": {"name": "ssh-peavine"}, "duration": 120.02226901054382, "eventid": "cowrie.session.closed", "msg": "Connection lost after 120 seconds", "beat": {"hostname": "ssh-peavine", "version": "6.5.4", "name": "ssh-peavine"}, "offset": 3165054, "@version": "1", "src_ip": "165.227.91.185", "prospector": {"type": "log"}, "sensor": "ssh-peavine"}
+
+```
+> :warning: **Collector**: The collector index creation works well on the first level of the json structure(make sure thet indices are created only on the first level). It can encrypt on more levels on the tree but index retrieval/quering of the data might not be deterministic(due to sorting of the json structure) if index was a multilevel, therefore it may result on unquerable data!
+
+
 # Troubleshooting
 - If an error regarding `unix:///var/run/docker.sock` or permission denied, please make sure docker daemon/service is running. 
 - If a module can not connect to another, make sure that the following configurations are correct:
