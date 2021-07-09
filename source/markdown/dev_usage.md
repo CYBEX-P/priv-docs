@@ -69,4 +69,6 @@ Backend API is only available via `priv-libs` module, the submodule name is `web
 
 
   
+## Getting shell
 
+Most modules support getting a shell for their docker container. Use the `--shell` flag when using their respective wrapper script.

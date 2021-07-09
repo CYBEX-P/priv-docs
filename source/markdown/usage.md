@@ -169,6 +169,12 @@ The Collector and Query use a simple Docker run procedure (not in daemon mode), 
 If bash scripts are not running because of permissions, please make them executable with `sudo chmod +x <script-name.sh>`. Alternatively run them using `bash` or `sh`, like so `sh <script-name.sh>`.
 ```
 
+```{admonition} Key Files Problems
+:class: caution
+
+If for some reason the module is stopped (either by a signal or error) while key files are bing fetched, it will produce bad key files. Next time the code runs it will try to read from said key files before trying to get them from the KMS server. This condition results in corrupted key files, which will lead to either the program crashing or to data that is encrypted incorrectly. To fix this dispose of the keys from `secrets` folder and run again (will fetch from KMS server). To prevent this, do not early terminate module.
+```
+
 # Running KMS and Backend as daemons
 
 The KMS and Backend modules use docker-compose. Docker-compose handles automatic start on boot (as specified in the docker-compose.yaml file) as daemons.  To achieve this, we can run each module (KMS, backend), wait for the script to deploy the containers and initialize them correctly and then reboot the system.
