@@ -247,6 +247,55 @@ this will result in only sending the following:
 The Collector index creation works well on the first level of the JSON structure(make sure that indices are created only on the first level). It can encrypt on more levels on the tree, but index retrieval/querying of the data might not be deterministic(due to sorting of the JSON structure) if the index was multilevel; therefore, it may result in unsearchable data.
 ```
 
+# Force key retrieval
+
+If for some reason keys are not working it may be necessary for keys to be fetched again from the KMS server (this applies to `collector` and `query`), one can:   
+
+1. Stop the module
+2. Delete the contents from `secrets` folder for that module
+3. Restart the module
+
+```{admonition} Keys folder
+:class: caution
+
+Do not delete the actual folder as the folder structure is important.
+```
+
+
+```{admonition} KMS keys
+:class: caution
+
+Do not delete keys from KMS `secret` folder. If system keys are deleted and there happens to be encrypted data in the backend and new data is submitted with different set of keys (KMS regenerates new keys upon not finding them) it will create incompatible data.
+```
+
+# Collector & collector-client status indicators
+
+In the least verbose mode `collector` and `collector-client` print letters indicating their current state. It is important to note that both of these programs are mutithreaded so output will not be in any guaranteed order. The indicators are a follows:
+
+collector:   
+
+| Indicator | Description                                                             |
+|:---------:|-------------------------------------------------------------------------|
+|     N     | A worked thread established a new connection with a collector-client    |
+|     R     | A worked thread read data from client successfully                      |
+|     E     | A worked thread encrypted the data successfully                         |
+|     P     | A worker thread posted encrypted data to backend successfully           |
+|     F     | A worker thread failed to posted encrypted data to backend, will retry  |
+|     L     | Worker thread gave up on posting encrypted data, too many fail attempts |
+
+collector-client:   
+
+| Indicator | Description                                                       |
+|:---------:|-------------------------------------------------------------------|
+|     i     | A new piece of data has been added to the work queue              |
+|     F     | All the data has been added to the work queue                     |
+|     .     | A piece of data was successfully sent to the collector            |
+|     D     | A worked thread has exited (usually after finishing all its work) |
+
+
+# Date format
+
+Date format can be any of the major date formats. This works when submitting data for encryption and when quering data using date ranges, not restricted to just UNIX epoch. This includes things like timezones as well. For more information on supported date format visit the [dateutil parser documentation](https://dateutil.readthedocs.io/en/stable/parser.html).
 
 # Troubleshooting
 - If an error regarding `unix:///var/run/docker.sock` or permission denied, please make sure docker daemon/service is running. 

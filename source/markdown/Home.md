@@ -18,8 +18,8 @@ Privacy preserving information sharing. This project aims to share data in an en
 
 This project was built using docker. For help regathering docker please visit [docker docs](https://docs.docker.com/).
 ## Structure
-Structure of the overall project is as follows
-![overview](images/overview-v2.png) 
+Structure of the overall project is as follows   
+![overview](../images/overview-v2.png) 
 
 
 
@@ -33,7 +33,7 @@ The KMS handles key creation for new members of the system. This also includes a
 
 ## Images Layout
 Layout of the docker images   
-![docker_images_layout](images/docker_images.png)  
+![docker_images_layout](../images/docker_images.png)  
 
 The privacy library image is the base image for all other modules.
 

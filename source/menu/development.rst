@@ -1,5 +1,5 @@
-Development
-============
+Developing with priv-libs
+==========================
 
 .. toctree::
    :maxdepth: 2

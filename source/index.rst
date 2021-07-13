@@ -15,14 +15,14 @@ Welcome to |project_name|'s documentation!
    menu/usage
    menu/api
    menu/development
-   menu/examples
+   menu/enc-dec-flow
    menu/sample
    menu/download
 
 
-.. Indices and tables
-.. ==================
+Indices and tables
+==================
 
-.. * :ref:`genindex`
-.. * :ref:`modindex`
-.. * :ref:`search`
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

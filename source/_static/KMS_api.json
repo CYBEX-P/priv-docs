@@ -1,0 +1,818 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "KMS priv",
+    "description": "API description for KMS module",
+    "contact": {}
+  },
+  "host": "cybex.cse.unr.edu:5002",
+  "basePath": "/",
+  "securityDefinitions": {
+    "auth": {
+      "type": "basic"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/get/key/de": {
+      "get": {
+        "description": "Get system DE key. Public in terms of key, keep key secret to enrolled users only.",
+        "summary": "Get DE system Key",
+        "tags": [
+          "Authenticated"
+        ],
+        "operationId": "GetDEsystemKey",
+        "deprecated": false,
+        "produces": [
+          "text/html; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "X-Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer token authentication"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/html; charset=utf-8": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsIfuH8a9bJYiEXcyjjQ+\nm9iPooZPzUSy7kQ64cTrhZ6uNcW2MTEMAquGeQngnY0cK4yIkkAnY0P90F1icsaY\ntcgSYPrWUDKBRKXzpCQLa2pq1H4ozHG2jrqorreLK9BQDoJNo+c/0KD5eKa2+YjU\n2ohBFSkqhDlxbaITGBB0f/YJ2dF73IO+JmuFGzMpUGxMDcRdxbJZsXFrWUD4pzB8\nh+bI68LR3ycUoVni67VFNBs0kMzxl9yQL5expE8pM3e7yQr/JdA7OoytMl7ikZE7\nc0d7s0gHYtKwONgwGxDoFpz2RP/9azfe8a/NmEj5A6DfqEb5XoeNk8Sifofy1EMi\nnwIDAQAB\n-----END PUBLIC KEY-----\n"
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "451"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:04:51 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get/attributes": {
+      "get": {
+        "description": "Get all system attributes. Usefull when wanting to know what attributes we can encrypt with.",
+        "summary": "Get attributes",
+        "tags": [
+          "Authenticated"
+        ],
+        "operationId": "Getattributes",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer token authentication"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Attributes"
+            },
+            "examples": {
+              "application/json": {
+                "attributes": [
+                  "UNR",
+                  "ITOPS",
+                  "attributes",
+                  "DEFAULT",
+                  "RESEARCH"
+                ]
+              }
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "65"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:05:23 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get/key/ore": {
+      "get": {
+        "description": "Get system ORE key. Public in terms of key, keep key secret to enrolled users only.",
+        "summary": "Get ORE system Key",
+        "tags": [
+          "Authenticated"
+        ],
+        "operationId": "GetOREsystemKey",
+        "deprecated": false,
+        "produces": [
+          "text/html; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "X-Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer token authentication"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/html; charset=utf-8": "ig/7kDEjdaVgi5VaCdK6DVks+L+4o8BLLeHdX7KDp1NU/jzi2ofmq3gzng8/xGVYU1Oza8Y6eV+7KRRlOlHREGGNgtsdGbraib7IKji66rSmnzuF8i+oP/jLpcQdFXKNXyNfybGKv9HVNNZgJ0l8ig7dpZlfuqPRTRrq1e04SeQxPAnhNNsQ2OTH06RwaRHt+A012zvvYuOZ4CPdgdf2IdXCCW2UfJ6d2iye2Aarh4uBt7UsM8vdS4dvrSkOg2RNXaOByeBPdjQ7qqAJ2wP5FPDcAr7VoIiWA/7aZB5zAkPMHy2MQUuQaeK8FdGt1SEoTsBp5lAxQDrlKSW1loY0oQ=="
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "344"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:06:56 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get/key/cpabe-pk": {
+      "get": {
+        "description": "Get system CPABE public key. Public in terms of key, keep key secret to enrolled users only.",
+        "summary": "Get CPABE public system key",
+        "tags": [
+          "Authenticated"
+        ],
+        "operationId": "GetCPABEpublicsystemkey",
+        "deprecated": false,
+        "produces": [
+          "text/html; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "X-Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer token authentication"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/html; charset=utf-8": "�\u0003}q\u0000(X\u0001\u0000\u0000\u0000gq\u0001CZ1:iFhh/d1nNHJQ0e0voQhhATOG07YlodcNVl+9QFvSO12UndEA5noLnOiTwtOVG+V271lv6ttt9Zs64WhVUG7lEwE=q\u0002X\u0002\u0000\u0000\u0000g2q\u0003CZ2:b0P2stbBvHPoVhWMVImhsV/GZpnSuiBail1NoZrrgbZPxWQwDPVPIFbHeekiRfBRaIPc4j5BJ6swgFTds9t5wAE=q\u0004X\u0001\u0000\u0000\u0000hq\u0005CZ1:Ah5tWCp+WfZU7w/4fnWxmz09CLGfi8/gFLPpejku+YzP4EYOejgjXek7hO+VM6u7dpPK3eDQX4pqccZrvOj17wE=q\u0006X\u0001\u0000\u0000\u0000fq\u0007CZ1:mmh+abc+rP7SfaVN6aDqwXAFaNrqbqGqgRORCjBtF8yeYhpRoq9FujNQDQG7v8RtXbEq1qVkIHp6aMsxW2ZaEQE=q\bX\n\u0000\u0000\u0000e_gg_alphaq\tC�3:gbxmpW7WNyM6njgQn+Oc/0b272IBNJMc17oGuT4q9sLc7l0KXsmi7v7M3gBzKGTN/66Bc7nGQPL0B0t8DeIZW3SwRLibaUmAHjZclFEh5p7ct0Uh0NViqxmM+/+R/Y9Wy0fA/p4quNGlIer8jgW++Y+pCTqIeSTDsjWDe9uDc9w=q\nu."
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "612"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:07:41 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get/key/cpabe-sk": {
+      "get": {
+        "description": "Get my CPABE secret key. Keep this key secret.",
+        "summary": "Get my CPABE secret key",
+        "tags": [
+          "Authenticated"
+        ],
+        "operationId": "GetmyCPABEsecretkey",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer token authentication"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/get/range/ore": {
+      "get": {
+        "description": "Get ORE  parameters. Gets \"ORE_IN_MIN\", \"ORE_IN_MAX\", \"ORE_OUT_MIN\", \"ORE_OUT_MAX\" for ORE encryption. Ranges for proper encrpytion in this sytem. Must use these as ranges for encryption/ compatibility.",
+        "summary": "Get ORE parameters",
+        "tags": [
+          "Authenticated"
+        ],
+        "operationId": "GetOREparameters",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer token authentication"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OREparameters"
+            },
+            "examples": {
+              "application/json": {
+                "ORE_IN_MAX": 18446744073709551615,
+                "ORE_IN_MIN": 0,
+                "ORE_OUT_MAX": 3.4028236692093846E+38,
+                "ORE_OUT_MIN": 0
+              }
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "121"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:09:52 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "Check if system is up.",
+        "summary": "UP",
+        "tags": [
+          "Public"
+        ],
+        "operationId": "UP",
+        "deprecated": false,
+        "produces": [
+          "text/html; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "502": {
+            "description": "Bad Gateway",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/html; charset=utf-8": "502 Bad Gateway\n"
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "3"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:10:29 GMT"
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/html; charset=utf-8": "up\n"
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "3"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:10:29 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "Login to system, retrieve access token with username and password.\nUsername and password required.",
+        "summary": "Login",
+        "tags": [
+          "Public"
+        ],
+        "operationId": "Login",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "text/html; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            },
+            "examples": {
+              "application/json": {
+                "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyNjEzMDk3NywianRpIjoiZjM2YWQ3ZDktNTIxMi00OTZlLTgyN2QtMzgyOTg4OWZhNjA4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImpvaG4iLCJuYmYiOjE2MjYxMzA5Nzd9.JkK0C22eKy53yDzTt6CTOb_UXQMjtpNq7LSJ6TLG89I"
+              }
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "265"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:02:57 GMT"
+              }
+            }
+          },
+          "401": {
+            "description": "UNAUTHORIZED",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/html; charset=utf-8": "Bad credentials"
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "15"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:01:44 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/create": {
+      "post": {
+        "description": "Create new user in system (admin inly endpoint): \nthe following must be provided username, password, password2(same as password), attributes(list of attributes).    \nNote: the system may change the username and attributes for compatibility with encrpytion, therefore it is important to look at the response for the finalized values.\nThe bearer token passed in the authentication header must be one of an admin.\n\nbasic authtentication header is \"Authorization\".\nbearer token header is \"X-Authorization\".",
+        "summary": "Create new user in system",
+        "tags": [
+          "Admin Only"
+        ],
+        "operationId": "Createnewuserinsystem",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "text/html; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "X-Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer token authentication, admin token"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreatenewuserinsystemRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "CREATED",
+            "schema": {
+              "$ref": "#/definitions/Createnewuserinsystem"
+            },
+            "examples": {
+              "application/json": {
+                "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyNjEzMDEzNywianRpIjoiYjQyMWRjNGEtYzk1Mi00NjI0LThmOTAtYTI2M2Y3OTYwZTFjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InRlc3QzIiwibmJmIjoxNjI2MTMwMTM3fQ.wkTPCqfUzrT-wXnI7WbWhlkiwYuaV6KNlxqFNtmi4g8",
+                "attributes": [
+                  "DEFAULT",
+                  "UNR",
+                  "ITOPS",
+                  "RESEARCH"
+                ],
+                "username": "test3"
+              }
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "336"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 22:48:57 GMT"
+              }
+            }
+          },
+          "409": {
+            "description": "CONFLICT",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/html; charset=utf-8": "user already exists"
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "19"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 22:47:42 GMT"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/rekey": {
+      "post": {
+        "description": "Create private keys for a user in the event that they were deleted in the KMS. (admin only endpoint).\n\nRequired body:\n{\n    \"username\": <username>\n}",
+        "summary": "Recreate Private Key for user",
+        "tags": [
+          "Admin Only"
+        ],
+        "operationId": "RecreatePrivateKeyforuser",
+        "deprecated": false,
+        "produces": [
+          "text/html; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "X-Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer token authentication, admin token"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RecreatePrivateKeyforuserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "BAD REQUEST",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/html; charset=utf-8": "User does not exist, please create instead"
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "42"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:04:12 GMT"
+              }
+            }
+          },
+          "201": {
+            "description": "CREATED",
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "text/html; charset=utf-8": "created"
+            },
+            "headers": {
+              "Content-Length": {
+                "type": "string",
+                "default": "7"
+              },
+              "Server": {
+                "type": "string",
+                "default": "Werkzeug/2.0.1 Python/3.6.9"
+              },
+              "Date": {
+                "type": "string",
+                "default": "Mon, 12 Jul 2021 23:04:01 GMT"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Attributes": {
+      "title": "Attributes",
+      "example": {
+        "attributes": [
+          "UNR",
+          "ITOPS",
+          "attributes",
+          "DEFAULT",
+          "RESEARCH"
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "attributes"
+      ]
+    },
+    "OREparameters": {
+      "title": "OREparameters",
+      "example": {
+        "ORE_IN_MAX": 18446744073709551615,
+        "ORE_IN_MIN": 0,
+        "ORE_OUT_MAX": 3.4028236692093846E+38,
+        "ORE_OUT_MIN": 0
+      },
+      "type": "object",
+      "properties": {
+        "ORE_IN_MAX": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ORE_IN_MIN": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ORE_OUT_MAX": {
+          "type": "number",
+          "format": "double"
+        },
+        "ORE_OUT_MIN": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "ORE_IN_MAX",
+        "ORE_IN_MIN",
+        "ORE_OUT_MAX",
+        "ORE_OUT_MIN"
+      ]
+    },
+    "CreatenewuserinsystemRequest": {
+      "title": "CreatenewuserinsystemRequest",
+      "example": {
+        "username": "john",
+        "password": "9*U9Brvm=Z6/K:G#K?AV",
+        "password2": "9*U9Brvm=Z6/K:G#K?AV",
+        "attributes": [
+          "DEFAULT",
+          "UNR",
+          "ITOPS",
+          "RESEARCH"
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "password2": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "username",
+        "password",
+        "password2",
+        "attributes"
+      ]
+    },
+    "Createnewuserinsystem": {
+      "title": "Createnewuserinsystem",
+      "example": {
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyNjEzMDEzNywianRpIjoiYjQyMWRjNGEtYzk1Mi00NjI0LThmOTAtYTI2M2Y3OTYwZTFjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InRlc3QzIiwibmJmIjoxNjI2MTMwMTM3fQ.wkTPCqfUzrT-wXnI7WbWhlkiwYuaV6KNlxqFNtmi4g8",
+        "attributes": [
+          "DEFAULT",
+          "UNR",
+          "ITOPS",
+          "RESEARCH"
+        ],
+        "username": "test3"
+      },
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "access_token",
+        "attributes",
+        "username"
+      ]
+    },
+    "RecreatePrivateKeyforuserRequest": {
+      "title": "RecreatePrivateKeyforuserRequest",
+      "example": {
+        "username": "john100"
+      },
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "username"
+      ]
+    },
+    "LoginRequest": {
+      "title": "LoginRequest",
+      "example": {
+        "username": "test100",
+        "password": "pass"
+      },
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "Login": {
+      "title": "Login",
+      "example": {
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyNjEzMDk3NywianRpIjoiZjM2YWQ3ZDktNTIxMi00OTZlLTgyN2QtMzgyOTg4OWZhNjA4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImpvaG4iLCJuYmYiOjE2MjYxMzA5Nzd9.JkK0C22eKy53yDzTt6CTOb_UXQMjtpNq7LSJ6TLG89I"
+      },
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "access_token"
+      ]
+    }
+  },
+  "security": [
+    {
+      "auth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public",
+      "description": "Does not require Bearer token"
+    },
+    {
+      "name": "Authenticated",
+      "description": ""
+    },
+    {
+      "name": "Admin Only",
+      "description": "Only administrators can access"
+    }
+  ]
+}

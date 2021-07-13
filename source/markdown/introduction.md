@@ -1,7 +1,3 @@
-Welcome to the Encrypted Analytics wiki!
-
-
-
 # Overview
 The Encrypted Analytics project is an end-to-end fully encrypted Cyber Threat Intelligence (CTI) sharing platform supporting encrypted analytics. It aims to share data in an encrypted manner with only the parties that meet specific attributes. 
 
