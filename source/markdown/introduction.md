@@ -76,8 +76,6 @@ This module handles:
 - Key distribution
 - Attribute management
 
-The API is detailed TODO [here]().   
-
 This module requires a Mongo database. The wrapper script initializes and runs a MongoDB image. 
 
 To configure the KMS with an external MongoDB instance, one can comment out the database section in the `docker-compose.yaml` file and specify the desired MongoDB URI in the configuration file.
@@ -88,8 +86,6 @@ This module is the interface for the following functions:
 - Storage of encrypted data
 - Retrieval of encrypted data
   - Encrypted data filtering
-
-The API is detailed TODO [here]().   
 
 To configure the KMS with an external MongoDB instance, one can comment out the database section in the `docker-compose.yaml` file and specify the desired MongoDB URI in the configuration file.
 

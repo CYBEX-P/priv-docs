@@ -39,8 +39,7 @@ procotol://host:port
 There is no trailing `/`
 ```
 
-The protocol can be either `http` or `https`. The server administrator will let you know. 
-By default, the protocol will be `http`; one can configure `https` by adding a reverse proxy like Nginx in front of each server. More information found [here](TODO).
+The protocol can be either `http` or `https`. By default, the protocol will be `http`; one can configure `https` by adding a reverse proxy like Nginx in front of each server.
 
 
 
@@ -302,7 +301,7 @@ Date format can be any of the major date formats. This works when submitting dat
 - If a module can not connect to another, make sure that the following configurations are correct:
   - the bind interface of the server
   - the address of the server in the client configuration
-  - for example, if the server is bound to its IP, it can not be accessed via localhost, even if they are the same machine. It is recommended to bind the servers to a local interface like "`127.0.0.1`:`<port>` so that they are only accessible locally and the use of proxypass using a reverse proxy (line Nginx) bound to the public interface, this would allow you to enable HTTPS. Please see [here](TODO) for more information on proxy setup.
+  - for example, if the server is bound to its IP, it can not be accessed via localhost, even if they are the same machine. It is recommended to bind the servers to a local interface like "`127.0.0.1`:`<port>` so that they are only accessible locally and the use of proxypass using a reverse proxy (line Nginx) bound to the public interface, this would allow you to enable HTTPS.
     - the address format (for clients) is as follows:
     - protocol://hostname:port
     - no slash at the end
