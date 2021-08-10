@@ -4,9 +4,9 @@ Sample Deployment (Try It!)
 .. toctree::
    :maxdepth: 3
 
-   ../markdown/under-construction
+   ../markdown/example
    
-..   ../markdown/example
+..   ../markdown/under-construction
    
 .. :caption: Examples:
 

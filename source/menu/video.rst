@@ -2,7 +2,7 @@ Video Tutorials
 ===============
 
 Intoduction & download
-----------------------
+-----------------------
 
 .. raw:: html
 
@@ -13,7 +13,7 @@ Intoduction & download
 
 
 Install/run KMS
-------------
+----------------
 
 .. raw:: html
 
@@ -33,7 +33,7 @@ Add user to KMS
 	</video>
 
 Install/run Backend
-----------------
+--------------------
 
 .. raw:: html
 
@@ -44,7 +44,7 @@ Install/run Backend
 
 
 Install/run Collector and Collector-client
----------------------------------------
+-------------------------------------------
 
 .. raw:: html
 
@@ -55,7 +55,7 @@ Install/run Collector and Collector-client
 
 
 Install/run query module
------------------------------
+--------------------------
 
 .. raw:: html
 
