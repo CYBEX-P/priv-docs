@@ -17,6 +17,7 @@ Welcome to |project_name|'s documentation!
    menu/development
    menu/enc-dec-flow
    menu/sample
+   menu/video
    menu/download
 
 
